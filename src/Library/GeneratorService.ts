@@ -7,7 +7,7 @@ export class GeneratorService {
   @inject(Config)
   private config: Config;
 
-  public async generateController (output: Output, { name, module, crud }: { name: string, module: string, crud: boolean }) {
+  public async generateController ({ name, module, crud }: { name: string, module: string, crud: boolean }) {
     const { config, nameFormats } = this.prepare(name);
     const { pascalCased }         = nameFormats;
     const moduleName              = this.formatNames(module).pascalCased;
@@ -32,11 +32,9 @@ export class GeneratorService {
     );
 
     await File.generate(config.templates.controller, destination, params);
-
-    output.success(`${pascalCased}Controller created.`);
   }
 
-  public async generateModule (output: Output, { name }: { name: string }) {
+  public async generateModule ({ name }: { name: string }) {
     const { config, nameFormats } = this.prepare(name);
     const modulePath              = path.resolve(config.moduleRoot, nameFormats.pascalCased);
     const importName              = `${nameFormats.pascalCased}Module`;
@@ -52,8 +50,6 @@ export class GeneratorService {
       .addImport(`../module/${nameFormats.pascalCased}`, importName)
       .modify(/( +)\w+,?\n];\s*$/, { custom: (match: string, space: string) => `${space}${importName},\n${match}` })
       .update();
-
-    output.success(`Created module ${nameFormats.pascalCased}`);
   }
 
   public formatNames (name: string): NameFormatsType {

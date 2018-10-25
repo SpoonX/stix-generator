@@ -8,11 +8,15 @@ export class GeneratorCommand extends AbstractCommand {
   @inject(GeneratorService)
   private generatorService: GeneratorService;
 
-  public generateController (output: Output, { name, module, crud }: { name: string, module: string, crud: boolean }) {
-    return this.generatorService.generateController(output, { name, module, crud });
+  public async generateController (output: Output, { name, module, crud }: { name: string, module: string, crud: boolean }) {
+    await this.generatorService.generateController({ name, module, crud });
+
+    output.success(`${this.generatorService.formatNames(name).pascalCased}Controller created.`);
   }
 
   public async generateModule (output: Output, { name }: { name: string }) {
-    return this.generatorService.generateModule(output, { name });
+    await this.generatorService.generateModule({ name });
+
+    output.success(`Created module ${this.generatorService.formatNames(name).pascalCased}`);
   }
 }
