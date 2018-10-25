@@ -1,5 +1,5 @@
 import { Config, inject, Output } from 'stix';
-import { Git, Package, File } from 'tape-roller';
+import { File } from 'tape-roller';
 import * as path from 'path';
 import { GeneratorConfigType } from './GeneratorConfigType';
 

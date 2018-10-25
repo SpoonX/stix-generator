@@ -1,5 +1,5 @@
 import { Cli } from 'stix';
-import { GeneratorCommand } from '../src/Command';
+import { GeneratorCommand } from '../Library/Command';
 
 export const cli = {
   commands: [

@@ -1,9 +1,4 @@
-import { Git, Package, File } from 'tape-roller';
-import { inject, AbstractCommand, Output, CliService, Config } from 'stix';
-
-import pluralize from 'pluralize';
-import * as path from 'path';
-import { GeneratorConfigType } from '../GeneratorConfigType';
+import { inject, AbstractCommand, Output, Config } from 'stix';
 import { GeneratorService } from '../GeneratorService';
 
 export class GeneratorCommand extends AbstractCommand {
