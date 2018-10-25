@@ -27,13 +27,13 @@
   },
   "homepage": "https://github.com/SpoonX/stix-generator",
   "scripts": {
-    "build": "tsc --build tsconfig.json",
+    "build": "tsc --build tsconfig.json && cp -r ./src/template ./dist/template",
     "prepare": "yarn build",
     "version": "conventional-changelog -p angular -i doc/CHANGELOG.md -s && git add -A doc/CHANGELOG.md",
     "postpublish": "git push upstream master && git push upstream --tags"
   },
   "devDependencies": {
-    "@types/pluralize": "^0.0.29",
+    "@types/glob": "^7.1.1",
     "stix": "^4.2.0",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
@@ -45,7 +45,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "pluralize": "^7.0.0",
     "tape-roller": "^2.0.0"
   }
 }

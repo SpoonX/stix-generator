@@ -1,5 +1,5 @@
 import { Cli } from 'stix';
-import { GeneratorCommand } from '../src/Command';
+import { GeneratorCommand } from '../Library/Command';
 
 export const cli = {
   commands: [
@@ -17,23 +17,10 @@ export const cli = {
         Cli.command('generate:module <name>', GeneratorCommand, 'generateModule', {
           description: 'Generate a module.',
         }),
-
-        // @todo move to stix-wetland
-        Cli.command('generate:entity <name>', GeneratorCommand, 'generateEntity', {
-          description: 'Generate an entity.',
-          options: {
-            field: {
-              alias: 'f',
-              description: 'Field for entity.',
-            },
-          },
-          examples: [
-           '-f username -f position:integer -f createdAt:field(type:DateTime,defaultTo:Mapping.now())',
-          ],
-        }),
       ],
 
       examples: [
+        `$ stix generate:module user`,
         `$ stix generate:controller user profile`,
         `$ stix generate:controller user profile --crud`,
       ],
