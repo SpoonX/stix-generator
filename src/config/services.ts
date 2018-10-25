@@ -1,7 +1,7 @@
-import { GeneratorService } from '../src/GeneratorService';
+import { GeneratorService } from '../Library/GeneratorService';
 
 export const services = {
   invokables: new Map([
-    [GeneratorService, GeneratorService],
+    [ GeneratorService, GeneratorService ],
   ]),
 };
