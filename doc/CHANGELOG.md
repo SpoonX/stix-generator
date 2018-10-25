@@ -1,3 +1,19 @@
+<a name="0.0.2"></a>
+## 0.0.2 (2018-10-25)
+
+
+### Bug Fixes
+
+* **GeneratorService:** mkdir for generateModule and add crud option to generateController ([c326039](https://github.com/SpoonX/stix-generator/commit/c326039))
+* **project:** move output from GeneratorService to GeneratorCommand ([3e2b77d](https://github.com/SpoonX/stix-generator/commit/3e2b77d))
+
+
+### Features
+
+* **project:** initial commit ([1aaf3c8](https://github.com/SpoonX/stix-generator/commit/1aaf3c8))
+
+
+
 <a name="1.1.4"></a>
 ## [1.1.4](https://github.com/SpoonX/stix-wetland/compare/v1.1.3...v1.1.4) (2018-10-22)
 
