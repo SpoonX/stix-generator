@@ -8,19 +8,8 @@ export class GeneratorCommand extends AbstractCommand {
   @inject(GeneratorService)
   private generatorService: GeneratorService;
 
-  // @todo move to stix-cli. Needs to be a standalone function that does this.
-  // async init (name: string) {
-  //   const project = path.resolve(process.cwd(), name);
-  //
-  //   await Git.clone('https://github.com/SpoonX/stix-skeleton.git', name, __dirname);
-  //   await File.remove(path.resolve(project, `.git`), true);
-  //   await Package.install(project);
-  // }
-
-  // @todo figure out if we can overwrite commands. If so, move the entity part to stix-wetland.
-  // @todo I've figured out the above, and we can. stix-wetland will override this generator
-  public generateController (output: Output, { name, field }: { name: string, field: string | string[] }) {
-    return this.generatorService.generateController({ name, field });
+  public generateController (output: Output, { name, module, crud }: { name: string, module: string, crud: boolean }) {
+    return this.generatorService.generateController(output, { name, module, crud });
   }
 
   public async generateModule (output: Output, { name }: { name: string }) {
