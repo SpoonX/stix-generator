@@ -7,8 +7,6 @@ import {
   QuoteKind,
   SourceFile,
 } from 'ts-simple-ast';
-import util from 'util';
-import { TypeMap } from './TypeMap';
 import { formatNames } from '../formatNames';
 
 export class Manipulator {
@@ -107,16 +105,4 @@ export class Manipulator {
       imports.addNamedImport({ name });
     });
   }
-
-  // makePRettyThins () {
-  //
-  //
-  //   c.addProperties([
-  //     createProperty('username'),
-  //     createProperty('password'),
-  //     createProperty('createdAt', { type: 'datetime', defaultTo: 'Mapping.now()' }),
-  //     createProperty('gender', { type: 'enumeration', enumeration: [ 'male', 'female', 'something else' ] }),
-  //   ]).slice(0, -1).forEach(p => p.appendWhitespace(writer => writer.newLine()));
-  //
-  // }
 }
