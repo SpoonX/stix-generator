@@ -1,0 +1,18 @@
+export const TypeMap: { [key: string]: string } = {
+  integer: 'number',
+  bigInteger: 'string',
+  text: 'string',
+  string: 'string',
+  float: 'number',
+  decimal: 'number',
+  boolean: 'boolean',
+  date: 'Date',
+  dateTime: 'Date',
+  datetime: 'Date',
+  time: 'Date',
+  timestamp: 'number',
+  binary: 'binary',
+  json: 'Object',
+  jsonb: 'Object',
+  uuid: 'string',
+};
