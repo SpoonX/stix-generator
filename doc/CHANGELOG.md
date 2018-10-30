@@ -1,3 +1,13 @@
+<a name="0.1.0"></a>
+# [0.1.0](https://github.com/SpoonX/stix-generator/compare/v0.0.3...v0.1.0) (2018-10-30)
+
+
+### Features
+
+* **project:** add project and entity generators ([cc49d69](https://github.com/SpoonX/stix-generator/commit/cc49d69))
+
+
+
 <a name="0.0.3"></a>
 ## [0.0.3](https://github.com/SpoonX/stix-generator/compare/v0.0.2...v0.0.3) (2018-10-25)
 
