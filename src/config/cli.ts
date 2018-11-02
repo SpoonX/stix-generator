@@ -29,12 +29,30 @@ export const cli = {
           ],
         }),
 
+        Cli.command('generate:crud <module> <name>', GeneratorCommand, 'generateCrud', {
+          description: 'Generate an entity, controller and registers a route for CRUD endpoints on <name>.',
+          options: {
+            field: {
+              alias: 'f',
+              description: 'Field to add to entity. Can be used multiple times.',
+            },
+            route: {
+              alias: 'r',
+              description: 'The base route for this endpoint. Default to /<module>/<name>',
+            },
+          },
+          examples: [
+            '$ stix generate:crud user profile -f moto:string -r /profile',
+            '$ stix generate:crud user profile -f createdAt.field(type:dateTime, defaultTo:now())',
+          ],
+        }),
+
         Cli.command('generate:action <module> <controller> <action>', GeneratorCommand, 'generateAction', {
           description: 'Generate an action for <controller>.',
           options: {
             route: {
               alias: 'r',
-              description: 'The route for this action. Default to /<controller>/<action>',
+              description: 'The route for this action. Default to /<action>',
             },
             method: {
               alias: 'm',
@@ -55,7 +73,6 @@ export const cli = {
       examples: [
         `$ stix generate:module user`,
         `$ stix generate:controller user profile`,
-        `$ stix generate:controller user profile --crud`,
       ],
     }),
   ],

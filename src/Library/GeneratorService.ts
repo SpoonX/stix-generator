@@ -14,12 +14,13 @@ export class GeneratorService {
   private config: Config;
 
   // If module doesn't exist, call generator to make it first.
-  public async generateController ({ name, module }: { name: string, module: string }) {
+  public async generateController ({ name, module, crud }: { name: string, module: string, crud?: boolean }) {
     const { config, nameFormats } = this.prepare(name);
     const { dirs } = config;
     const controllerClass = `${nameFormats.pascalCased}Controller`;
     const exportString = `export * from './${controllerClass}';\n`;
     const moduleDir = this.pathTo(module);
+    const parameters: { [key: string]: string } = { ... nameFormats };
     const controllerDir = this.pathTo(
       module,
       dirs.src,
@@ -34,7 +35,15 @@ export class GeneratorService {
 
     const controllerIndexFile = path.resolve(controllerDir, 'index.ts');
 
-    await File.generate(config.templates.controller, path.resolve(controllerDir, `${controllerClass}.ts`), nameFormats);
+    if (crud) {
+      parameters.decorators = `@dbActions(${nameFormats.pascalCased})\n`;
+      parameters.imports = [
+        "import { dbActions } from 'stix-wetland';",
+        `import { ${nameFormats.pascalCased} } from '../Entity/${nameFormats.pascalCased}';`,
+      ].join('\n') + '\n';
+    }
+
+    await File.generate(config.templates.controller, path.resolve(controllerDir, `${controllerClass}.ts`), parameters);
 
     try {
       await util.promisify(fs.stat)(controllerIndexFile);
@@ -63,8 +72,8 @@ export class GeneratorService {
   public async generateAction (options: ActionOptions) {
     const { controller, module, action, route, method } = options;
     const { config: { dirs }, nameFormats: { pascalCased } } = this.prepare(controller);
-    const className = `${pascalCased}Controller`;
-    const controllerFile = this.pathTo(module, dirs.src, dirs.controller, `${className}.ts`);
+    const controllerClassName = `${pascalCased}Controller`;
+    const controllerFile = this.pathTo(module, dirs.src, dirs.controller, `${controllerClassName}.ts`);
 
     // Make sure controller exists.
     try {
@@ -77,7 +86,7 @@ export class GeneratorService {
 
     manipulator.ensureImport('stix', 'ContextInterface', 'Response');
 
-    manipulator.useClass(className).addMethod({
+    manipulator.useClass(controllerClassName).addMethod({
       isAsync: true,
       scope: Scope.Public,
       bodyText: `return this.internalServerErrorResponse('To be implemented.');`,
@@ -86,7 +95,7 @@ export class GeneratorService {
       name: action,
     });
 
-    await this.addRoute(module, { route, method, action, controller: className });
+    await this.addRoute(module, { route, method, action, controller, controllerClassName });
 
     return manipulator.save();
   }
@@ -176,20 +185,20 @@ export class GeneratorService {
 
   public async addRoute (
     module: string,
-    routeOptions: { route: string, method: string, controller: string, action: string },
+    routeOptions: { route: string, method: string, controller: string, controllerClassName?: string, action?: string },
     helper: { specifier: string, name: string } = { specifier: 'stix', name: 'Route' },
   ) {
-    const { action, controller, method = 'get' } = routeOptions;
-    const route = routeOptions.route || `/${action}`;
-    const routeString = `${helper.name}.${method}('${route}', ${controller}, '${action}'),\n`;
+    const { action, controller, controllerClassName, method = 'get' } = routeOptions;
+    const className = controllerClassName || `${formatNames(controller).pascalCased}Controller`;
+    const route = routeOptions.route || `${controller}/${action}`;
+    const actionArgument = action ? ", '${action}'" : '';
+    const routeString = `${helper.name}.${method}('${route}', ${className}${actionArgument}),\n`;
     const { config: { dirs } } = this.prepare(module);
     const routerFile = this.pathTo(module, dirs.config, 'router.ts');
-
     const manipulator = this.getAstManipulator(routerFile);
 
     manipulator.ensureImport(helper.specifier, helper.name);
-    manipulator.ensureImport(path.join('..', dirs.src, dirs.controller), controller);
-
+    manipulator.ensureImport(path.join('..', dirs.src, dirs.controller), className);
 
     const replacer = (match: string, opening: string, spaces: string, closing: string, backupSpaces: string) => {
       return `${opening}${spaces || backupSpaces.repeat(2)}${routeString}${closing}`;
