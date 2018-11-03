@@ -1,3 +1,13 @@
+<a name="0.1.1"></a>
+## [0.1.1](https://github.com/SpoonX/stix-generator/compare/v0.1.0...v0.1.1) (2018-11-03)
+
+
+### Features
+
+* **project:** add crud generator ([ccd2a32](https://github.com/SpoonX/stix-generator/commit/ccd2a32))
+
+
+
 <a name="0.1.0"></a>
 # [0.1.0](https://github.com/SpoonX/stix-generator/compare/v0.0.3...v0.1.0) (2018-10-30)
 
