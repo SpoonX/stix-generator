@@ -18,5 +18,6 @@ export const generator = {
   templates: {
     controller: path.resolve(templateRoot, 'controller', 'controller.ts'),
     module: path.resolve(templateRoot, 'module'),
+    entityConfig: path.resolve(templateRoot, 'entity', 'entity.config.ts'),
   },
 };
