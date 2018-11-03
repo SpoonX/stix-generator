@@ -11,6 +11,7 @@ export type GeneratorConfigType = Partial<{
   templates: {
     controller: string;
     module: string;
+    entityConfig: string;
     [key: string]: string;
   }
 }>;

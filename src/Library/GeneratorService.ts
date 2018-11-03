@@ -101,13 +101,28 @@ export class GeneratorService {
   }
 
   public async generateEntity (options: EntityOptions) {
-    const { config, nameFormats } = this.prepare(options.name);
-    const { src, entity } = config.dirs;
+    const { config: { templates, dirs: { src, entity, config } }, nameFormats } = this.prepare(options.name);
+    const { module } = options;
     const className = nameFormats.pascalCased;
-    const entityPath = this.pathTo(options.module, src, entity, `${className}.ts`);
+    const entityPath = this.pathTo(module, src, entity, `${className}.ts`);
     const manipulator = this.getAstManipulator(entityPath, true);
+    const wetlandConfigFile = this.pathTo(module, config, 'wetland.ts');
+    const configIndexFile = this.pathTo(module, config, 'index.ts');
 
     manipulator.ensureImport('wetland', 'entity', 'autoFields');
+
+    try {
+      await util.promisify(fs.stat)(this.pathTo(module));
+    } catch (error) {
+      await this.generateModule({ name: module });
+    }
+
+    try {
+      await util.promisify(fs.stat)(wetlandConfigFile);
+    } catch (error) {
+      await File.modify(configIndexFile, /\n$/, { append: `export * from './wetland';\n` });
+      await File.copy(templates.entityConfig, wetlandConfigFile);
+    }
 
     const classDeclaration = manipulator.createClass({
       isExported: true,
