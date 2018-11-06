@@ -133,13 +133,15 @@ export class GeneratorService {
       ],
     });
 
-    const fields = (Array.isArray(options.field) ? options.field : [ options.field ])
-      .map(field => this.createField(manipulator, field));
+    if (options.field) {
+      const fields = (Array.isArray(options.field) ? options.field : [ options.field ])
+        .map(field => this.createField(manipulator, field));
 
-    classDeclaration
-      .addProperties(fields)
-      .slice(0, -1)
-      .forEach(p => p.appendWhitespace(writer => writer.newLine()));
+      classDeclaration
+        .addProperties(fields)
+        .slice(0, -1)
+        .forEach(p => p.appendWhitespace(writer => writer.newLine()));
+    }
 
     return manipulator.save();
   }
