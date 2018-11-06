@@ -1,3 +1,13 @@
+<a name="0.1.3"></a>
+## [0.1.3](https://github.com/SpoonX/stix-generator/compare/v0.1.2...v0.1.3) (2018-11-06)
+
+
+### Bug Fixes
+
+* **GeneratorService:** prevent failure on missing fields ([d9175a8](https://github.com/SpoonX/stix-generator/commit/d9175a8))
+
+
+
 <a name="0.1.2"></a>
 ## [0.1.2](https://github.com/SpoonX/stix-generator/compare/v0.1.1...v0.1.2) (2018-11-03)
 
