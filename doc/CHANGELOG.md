@@ -1,3 +1,13 @@
+<a name="0.1.4"></a>
+## [0.1.4](https://github.com/SpoonX/stix-generator/compare/v0.1.3...v0.1.4) (2018-11-07)
+
+
+### Bug Fixes
+
+* **GeneratorService:** generate proper action name ([e7a8fe0](https://github.com/SpoonX/stix-generator/commit/e7a8fe0))
+
+
+
 <a name="0.1.3"></a>
 ## [0.1.3](https://github.com/SpoonX/stix-generator/compare/v0.1.2...v0.1.3) (2018-11-06)
 
