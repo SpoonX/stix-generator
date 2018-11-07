@@ -207,7 +207,7 @@ export class GeneratorService {
   ) {
     const { action, controller, controllerClassName, method = 'get' } = routeOptions;
     const className = controllerClassName || `${formatNames(controller).pascalCased}Controller`;
-    const route = routeOptions.route || `${controller}/${action}`;
+    const route = routeOptions.route || `/${controller}/${action}`;
     const actionArgument = action ? `, '${action}'` : '';
     const routeString = `${helper.name}.${method}('${route}', ${className}${actionArgument}),\n`;
     const { config: { dirs } } = this.prepare(module);
