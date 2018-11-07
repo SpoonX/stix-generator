@@ -1,3 +1,13 @@
+<a name="0.1.5"></a>
+## [0.1.5](https://github.com/SpoonX/stix-generator/compare/v0.1.4...v0.1.5) (2018-11-07)
+
+
+### Bug Fixes
+
+* **GeneratorService:** prepend route with root slash ([4278984](https://github.com/SpoonX/stix-generator/commit/4278984))
+
+
+
 <a name="0.1.4"></a>
 ## [0.1.4](https://github.com/SpoonX/stix-generator/compare/v0.1.3...v0.1.4) (2018-11-07)
 
