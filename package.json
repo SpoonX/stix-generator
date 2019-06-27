@@ -1,6 +1,6 @@
 {
   "name": "stix-generator",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A stix module providing code-generators for the CLI",
   "repository": {
     "type": "git",
