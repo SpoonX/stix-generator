@@ -5,7 +5,7 @@ import * as fs from 'fs';
 import { GeneratorConfigType } from './GeneratorConfigType';
 import { formatNames, NameFormatsType } from './formatNames';
 import { Manipulator } from './Manipulator';
-import { Scope } from 'ts-simple-ast';
+import { Scope } from 'ts-morph';
 import * as util from 'util';
 import { TypeMap } from './Manipulator/TypeMap';
 
@@ -88,8 +88,8 @@ export class GeneratorService {
 
     manipulator.useClass(controllerClassName).addMethod({
       isAsync: true,
+      statements: [ `return this.internalServerErrorResponse('To be implemented.');` ],
       scope: Scope.Public,
-      bodyText: `return this.internalServerErrorResponse('To be implemented.');`,
       parameters: [ { name: 'ctx', type: 'ContextInterface' } ],
       returnType: 'Promise<Response>',
       name: action,

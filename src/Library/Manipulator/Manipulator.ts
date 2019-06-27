@@ -1,12 +1,14 @@
 import {
   ClassDeclaration,
   ClassDeclarationStructure,
-  EnumDeclarationStructure, ImportSpecifierStructure,
+  EnumDeclarationStructure,
+  ImportSpecifierStructure,
   IndentationText,
   Project,
   QuoteKind,
   SourceFile,
-} from 'ts-simple-ast';
+  StructureKind,
+} from 'ts-morph';
 import { formatNames } from '../formatNames';
 
 export class Manipulator {
@@ -71,6 +73,7 @@ export class Manipulator {
     const { pascalCased } = formatNames(name);
 
     this.enumerations.push({
+      kind: StructureKind.Enum,
       name: pascalCased,
       isExported: true,
       members: enumeration.map((name: string) => ({ name: formatNames(name).pascalCased, value: name })),

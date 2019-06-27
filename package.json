@@ -46,6 +46,6 @@
   "license": "MIT",
   "dependencies": {
     "tape-roller": "^2.0.1",
-    "ts-simple-ast": "^17.1.1"
+    "ts-morph": "^2.3.0"
   }
 }
